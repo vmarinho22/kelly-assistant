@@ -16,6 +16,7 @@ def main():
                 
                 command = speech_recognition.transpile_audio(audio_command_data)
                 
+                print('')
                 print("Comando: "+ command)
                 print('')
             else:
