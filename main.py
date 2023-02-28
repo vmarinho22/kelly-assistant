@@ -1,25 +1,28 @@
-import speech_recognition as sr
+from src import SpeechRecognition
 
-recognizer = sr.Recognizer()
 
-with sr.Microphone() as source:
-    while 1 == 1:
-        print("Aguardando fala")
-        audio_text = recognizer.listen(source)
-        print("Time over, thanks")
+def main():
+    speech_recognition = SpeechRecognition()
+    command = ''
+    
+    while 'desligar assistente' not in command.lower():
+        audio_data = speech_recognition.listen('Aguardando fala inicial')
         
         try:
-            audio_transpiled = recognizer.recognize_google(audio_text, language = "pt-BR")
+            audio_transpiled = speech_recognition.transpile_audio(audio_data)
             
-            if(audio_transpiled == 'Kelly' or audio_transpiled == 'kelly'):
-                print("Aguardando comando")
-                audio_command_text = recognizer.listen(source)
-                print("Time over, thanks")
+            if 'kelly' in audio_transpiled.lower():
+                audio_command_data = speech_recognition.listen('Aguardando comando')
                 
-                audio_command_transpiled = recognizer.recognize_google(audio_command_text, language = "pt-BR")
+                command = speech_recognition.transpile_audio(audio_command_data)
                 
-                print("Comando: "+ audio_command_transpiled)
+                print("Comando: "+ command)
+                print('')
             else:
-                print("Text: "+ audio_transpiled)
-        except:
-            print("Sorry, I did not get that")
+                print('Ignorando comando\n')
+                print('')
+        except: 
+            print('Não consigo entender o que falou :/')
+            
+if __name__ == '__main__':
+    main()
