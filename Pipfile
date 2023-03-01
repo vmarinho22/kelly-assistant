@@ -6,6 +6,8 @@ name = "kelly-assistant"
 [packages]
 speechrecognition = "*"
 pyaudio = "*"
+gtts = "*"
+playsound = "==1.2.2"
 
 [dev-packages]
 

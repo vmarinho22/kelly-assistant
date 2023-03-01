@@ -1,5 +1,8 @@
 {
   "cSpell.words": [
-    "pipenv"
+    "gethostname",
+    "gtts",
+    "pipenv",
+    "playsound"
   ]
 }
