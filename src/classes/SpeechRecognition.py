@@ -10,14 +10,14 @@ class SpeechRecognition:
     
     recognizer = sr.Recognizer()
     
-    def listen(self, initial_message: str):
+    def listen(self, log_message: str):
         
         """
             Method to capture audio from microphone
         """
         
         with sr.Microphone() as source:
-            print(initial_message)
+            print(log_message)
             audio_data = self.recognizer.listen(source)
             print('Audio captado!')
             print('')

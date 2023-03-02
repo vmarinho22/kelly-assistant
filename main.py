@@ -1,33 +1,28 @@
 import time
 
-from src import AudioSystem, SpeechRecognition, online
+from src import Assistant, online
 
-speech_recognition = SpeechRecognition()
-audio_system = AudioSystem()
+assistant = Assistant()
 
 def main():
 
     command = ''
-    audio_system.play_audio('init')
+    assistant.speak('init')
     
-    while 'desligar assistente' not in command.lower():
+    while assistant.shutdown_command not in command.lower():
         
         while not online():
-            audio_system.play_audio('internet-connection-error')
+            assistant.speak('internet-connection-error')
             time.sleep(5)
-    
-        audio_data = speech_recognition.listen('Ouvindo...')
-        
         try:
-            audio_transpiled = speech_recognition.transpile_audio(audio_data)
+            audio_transpiled = assistant.listen('Ouvindo...')
             
-            if 'kelly' in audio_transpiled.lower():
-                audio_system.play_audio('help')
-                audio_command_data = speech_recognition.listen('Aguardando comando')
+            if assistant.is_called(audio_transpiled):
+                assistant.speak('help')
                 
-                command = speech_recognition.transpile_audio(audio_command_data)
+                command = assistant.listen('Aguardando comando...')
                 
-                audio_system.play_audio('running-command')
+                assistant.speak('running-command')
                 time.sleep(1)
                 
                 print('')
@@ -39,7 +34,7 @@ def main():
         except: 
             print('Não consigo entender o que falou :/')
             
-    audio_system.play_audio('bye')
+    assistant.speak('bye')
             
 if __name__ == '__main__':
     main()
