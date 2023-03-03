@@ -7,17 +7,18 @@ nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('omw-1.4') # Open Multilingual WordNet (opcional)
 
-from src import Assistant, NaturalLanguageProcessing, online
+from src import Assistant, Command, online
 
 assistant = Assistant()
-naturalLang = NaturalLanguageProcessing()
+command = Command()
 
 def main():
 
-    command = ''
+    command_text = ''
     assistant.speak('init')
     
-    while assistant.shutdown_command not in command.lower():
+    
+    while assistant.shutdown_command not in command_text.lower():
         
         while not online():
             assistant.speak('internet-connection-error')
@@ -28,27 +29,12 @@ def main():
             if assistant.is_called(audio_transpiled):
                 assistant.speak('help')
                 
-                command = assistant.listen('Aguardando comando...')
+                command_text = assistant.listen('Aguardando comando...')
                 
                 assistant.speak('running-command')
                 time.sleep(1)
                 
-                keywords = naturalLang.get_keywords(command)
-                
-                all_synonyms = []
-                
-                print(keywords)
-                
-                for keyword in keywords:
-                    print(naturalLang.is_similar(keyword, 'horas'))
-                    # all_synonyms.append(naturalLang.get_synonyms(keyword))
-                
-                print(keywords)
-                print(all_synonyms)
-                
-                print('')
-                print("Comando: "+ command)
-                print('')
+                command.process(command_text)
             else:
                 print('Ignorando comando\n')
                 print('')
