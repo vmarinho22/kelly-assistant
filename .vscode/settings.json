@@ -1,8 +1,15 @@
 {
   "cSpell.words": [
+    "fdist",
     "gethostname",
     "gtts",
+    "nltk",
     "pipenv",
-    "playsound"
+    "playsound",
+    "punkt",
+    "stopwords",
+    "synset",
+    "synsets",
+    "wordnet"
   ]
 }

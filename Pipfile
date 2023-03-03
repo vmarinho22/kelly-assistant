@@ -8,6 +8,7 @@ speechrecognition = "*"
 pyaudio = "*"
 gtts = "*"
 playsound = "==1.2.2"
+nltk = "*"
 
 [dev-packages]
 

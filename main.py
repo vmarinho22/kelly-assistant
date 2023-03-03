@@ -1,8 +1,16 @@
 import time
 
-from src import Assistant, online
+import nltk
+
+nltk.download('wordnet')
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('omw-1.4') # Open Multilingual WordNet (opcional)
+
+from src import Assistant, NaturalLanguageProcessing, online
 
 assistant = Assistant()
+naturalLang = NaturalLanguageProcessing()
 
 def main():
 
@@ -25,14 +33,28 @@ def main():
                 assistant.speak('running-command')
                 time.sleep(1)
                 
+                keywords = naturalLang.get_keywords(command)
+                
+                all_synonyms = []
+                
+                print(keywords)
+                
+                for keyword in keywords:
+                    print(naturalLang.is_similar(keyword, 'horas'))
+                    # all_synonyms.append(naturalLang.get_synonyms(keyword))
+                
+                print(keywords)
+                print(all_synonyms)
+                
                 print('')
                 print("Comando: "+ command)
                 print('')
             else:
                 print('Ignorando comando\n')
                 print('')
-        except: 
+        except Exception as error: 
             print('Não consigo entender o que falou :/')
+            print(error)
             
     assistant.speak('bye')
             

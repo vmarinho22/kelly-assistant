@@ -25,6 +25,12 @@ class Assistant:
         return audio_transpiled
     
     def speak(self, fileName: str, text: str = None) -> None:
+        """
+            Method to speak audio from internal file.
+            
+            If params `text` is sending, the method will create the audio and will play this created
+            audio.
+        """
         if text:
             self.audio_system.create_audio_by_text(fileName, text)
         self.audio_system.play_audio(fileName)    
