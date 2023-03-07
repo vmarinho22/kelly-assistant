@@ -2,9 +2,16 @@ import json
 import os
 from datetime import datetime
 
+import openai
+from dotenv import load_dotenv
+
 from .AudioSystem import AudioSystem
 from .NaturalLanguageProcessing import NaturalLanguageProcessing
 
+load_dotenv()
+
+openai.organization = os.getenv("OPENAI_ORGANIZATION_ID")
+openai.api_key = os.getenv("OPENAI_SECRET_KEY")
 
 class Command:
     """
@@ -85,6 +92,8 @@ class Command:
                 year = now.year
                 
                 output_text = f'A data atual é dia {day} de {month} de{year}'
+                
+
         
         self.audio.create_audio_by_text(output_text, 'command-output')
         self.audio.play_audio('command-output')
@@ -105,8 +114,6 @@ class Command:
         
         internal_command = self.find_command(keywords)
         
-        print("internal_command: " + internal_command)
-        
         # try to find internal command using synonyms of keywords
         if internal_command == '':
             internal_command = self.try_find_command_by_synonyms(keywords)
@@ -115,6 +122,13 @@ class Command:
             self.run_command(internal_command)
             return True
         
-
+        # If command has not found, the AI transform command in question and use OPENAI API to search the answer
         
-        return False
+        response = openai.Completion.create(model="text-davinci-003", prompt=command, temperature=0, max_tokens=2048)
+        
+        final_openai_text_response = response["choices"][0]["text"]
+        
+        self.audio.create_audio_by_text(final_openai_text_response, 'command-output')
+        self.audio.play_audio('command-output')
+        
+        return True

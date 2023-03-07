@@ -1,9 +1,12 @@
 {
   "cSpell.words": [
+    "davinci",
+    "dotenv",
     "fdist",
     "gethostname",
     "gtts",
     "nltk",
+    "openai",
     "pipenv",
     "playsound",
     "punkt",

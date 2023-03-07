@@ -9,6 +9,8 @@ pyaudio = "*"
 gtts = "*"
 playsound = "==1.2.2"
 nltk = "*"
+openai = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
