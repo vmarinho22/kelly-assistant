@@ -13,6 +13,20 @@ class Command:
     natura_lang = NaturalLanguageProcessing()
     commands = {}
     audio = AudioSystem()
+    full_month = [
+        'janeiro', 
+        'fevereiro',
+        'março',
+        'abril',
+        'maio',
+        'junho',
+        'julho',
+        'agosto',
+        'setembro',
+        'outubro',
+        'novembro',
+        'dezembro'
+    ]
     
     
     def __init__(self) -> None:
@@ -51,17 +65,31 @@ class Command:
         """
             Method to run command
         """
+        command = ''
+        output_text= ''
         
         match command_key:
             case "hora":
                 now = datetime.now()
                 hour = now.hour
                 minutes = now.minute
+                hour_text = f'hora{hour > 1 and "s" or "" }'
+                minutes_text= f'minuto{minutes > 1 and "s" or "" }'
 
-                text = f'O horário atual é {hour} hora{hour > 1 and "s" or "" } e {minutes} minuto{minutes > 1 and "s" or "" }'
-                self.audio.create_audio_by_text(text, 'command-output')
-                self.audio.play_audio('command-output')
-                print('comando hora executando')
+                output_text = f'O horário atual é {hour} {hour_text} e {minutes} {minutes_text}'
+                
+            case "data":
+                now = datetime.now()
+                day = now.day
+                month = self.full_month[now.month - 1]
+                year = now.year
+                
+                output_text = f'A data atual é dia {day} de {month} de{year}'
+        
+        self.audio.create_audio_by_text(output_text, 'command-output')
+        self.audio.play_audio('command-output')
+        print(f'Comando "{command}" executando')
+                
         
     
     def process(self, command: str) -> bool:

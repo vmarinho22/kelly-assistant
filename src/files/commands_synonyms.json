@@ -3,5 +3,10 @@
     "hora", 
     "horas", 
     "horário"
+  ],
+  "data": [
+    "dia",
+    "data",
+    "data atual"
   ]
 }
