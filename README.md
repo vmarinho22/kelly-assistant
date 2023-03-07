@@ -28,6 +28,10 @@ Para rodar esse projeto, você vai precisar adicionar as seguintes variáveis de
 
 Para rodar o projeto, você deve ter o Python 3.10+ instalado em sua maquina! Para verificar se o Python está instalado e qual é a versão instalada, use o comando `python -V`.
 
+
+Também é necessário você criar um arquivo chamado `database.db`, que é um banco SQLite para o gerenciamento dos eventos
+
+
 Primeiramente, clone o projeto.
 
 ```bash
