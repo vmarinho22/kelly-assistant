@@ -36,8 +36,8 @@ class Assistant:
             audio.
         """
         if text:
-            self.audio_system.create_audio_by_text(file_name, text)
-        self.audio_system.play_audio(file_name)    
+            self.audio_system.create_audio_by_text(text, file_name)
+        self.audio_system.play_audio(file_name)
         
     def is_called(self, text: str) -> bool:
         return 'kelly' in text.lower()
