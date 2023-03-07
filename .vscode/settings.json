@@ -10,6 +10,7 @@
     "pipenv",
     "playsound",
     "punkt",
+    "Sqlite",
     "stopwords",
     "synset",
     "synsets",

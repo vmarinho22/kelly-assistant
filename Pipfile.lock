@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "6498da60992b4e5976b03a338d660acfeec8e9ea788f79c040610a3957284476"
+            "sha256": "9225058726666a0345423b565a2e9508eebdc424e1a1d73b8ea6dec954ef6f18"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -437,6 +437,13 @@
             ],
             "index": "kelly-assistant",
             "version": "==0.27.0"
+        },
+        "peewee": {
+            "hashes": [
+                "sha256:1800c0a04962ee99d161c07f5a12fc49549caf5cfcda426a9103e34e37f854ba"
+            ],
+            "index": "kelly-assistant",
+            "version": "==3.16.0"
         },
         "playsound": {
             "hashes": [

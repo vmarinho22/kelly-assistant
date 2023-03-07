@@ -162,3 +162,6 @@ cython_debug/
 
 # Command output sound
 sounds/command-output.mp3
+
+# Db file
+database.db

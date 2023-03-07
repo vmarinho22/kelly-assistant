@@ -8,11 +8,14 @@ nltk.download('stopwords')
 nltk.download('omw-1.4') # Open Multilingual WordNet (opcional)
 
 from src import Assistant, Command, online
+from src.db import create_tables
 
 assistant = Assistant()
 command = Command()
 
 def main():
+    
+    create_tables()
 
     command_text = ''
     assistant.speak('init')

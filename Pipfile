@@ -11,6 +11,7 @@ playsound = "==1.2.2"
 nltk = "*"
 openai = "*"
 python-dotenv = "*"
+peewee = "*"
 
 [dev-packages]
 
