@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from .Assistant import Assistant
 from .AudioSystem import AudioSystem
 from .NaturalLanguageProcessing import NaturalLanguageProcessing
+from .Event import Event
 
 load_dotenv()
 
@@ -24,20 +25,7 @@ class Command:
     commands = {}
     assistant = Assistant()
     audio_system = AudioSystem()
-    full_month = [
-        'janeiro',
-        'fevereiro',
-        'março',
-        'abril',
-        'maio',
-        'junho',
-        'julho',
-        'agosto',
-        'setembro',
-        'outubro',
-        'novembro',
-        'dezembro'
-    ]
+    event = Event()
     current_command_tokens = []
 
     def __init__(self) -> None:
@@ -94,31 +82,11 @@ class Command:
                 command = 'data'
                 now = datetime.now()
                 day = now.day
-                month = self.full_month[now.month - 1]
+                month = self.event.full_month[now.month - 1]
                 year = now.year
 
                 output_text = f'A data atual é dia {day} de {month} de{year}'
 
-            case "criar":
-
-                if "evento" in self.current_command_tokens or "lembrete" in self.current_command_tokens:
-                    command = 'criar-evento'
-                    output_text = f'Criando projeto'
-                    
-                    self.assistant.speak('what-event-title')
-                    event_name = self.assistant.listen('Ouvindo título do evento...')
-                    
-                    self.assistant.speak('running-command')
-                    time.sleep(1)
-                    
-                    self.assistant.speak('what-event-data')
-                    event_date = self.assistant.listen('Ouvindo data e horário do evento...')
-                    
-                    self.assistant.speak('running-command')
-                    
-                    print(event_name)
-                    print(event_date)
-                    
         self.assistant.speak('command-output', output_text)
         self.audio_system.delete_audio('command-output')
 

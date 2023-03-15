@@ -12,6 +12,7 @@ nltk = "*"
 openai = "*"
 python-dotenv = "*"
 peewee = "*"
+python-dateutil = "*"
 
 [dev-packages]
 
