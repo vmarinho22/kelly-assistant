@@ -3,7 +3,6 @@ import time
 import nltk
 
 from src import Assistant, Command, online
-from src.db import create_tables
 
 nltk.download('wordnet')
 nltk.download('punkt')
@@ -18,7 +17,6 @@ command = Command()
 
 
 def main():
-    create_tables()
 
     command_text = ''
     assistant.speak('init')
