@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 from .Assistant import Assistant
 from .AudioSystem import AudioSystem
 from .NaturalLanguageProcessing import NaturalLanguageProcessing
-from .Event import Event
 
 load_dotenv()
 
@@ -25,7 +24,6 @@ class Command:
     commands = {}
     assistant = Assistant()
     audio_system = AudioSystem()
-    event = Event()
     current_command_tokens = []
 
     def __init__(self) -> None:
