@@ -27,6 +27,7 @@ def main():
             assistant.speak('internet-connection-error')
             time.sleep(5)
         try:
+
             audio_transpiled = assistant.listen('Ouvindo...')
 
             if assistant.is_called(audio_transpiled):

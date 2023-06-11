@@ -9,6 +9,10 @@
     "data",
     "data atual"
   ],
+  "temperatura": [
+    "temperatura",
+    "clima"
+  ],
   "criar": [
     "criar", "salvar", "gerar"
   ]

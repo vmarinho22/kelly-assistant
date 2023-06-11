@@ -1,6 +1,6 @@
 import json
 import os
-import time
+import requests
 from datetime import datetime
 
 import openai
@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 from .Assistant import Assistant
 from .AudioSystem import AudioSystem
 from .NaturalLanguageProcessing import NaturalLanguageProcessing
+from .GeoLocation import GeoLocation
 
 load_dotenv()
 
@@ -24,9 +25,11 @@ class Command:
     commands = {}
     assistant = Assistant()
     audio_system = AudioSystem()
+    geo = GeoLocation()
     current_command_tokens = []
 
     def __init__(self) -> None:
+        self.event = None
         abspath = os.path.abspath("src/files/commands_synonyms.json")
 
         with open(abspath, encoding='utf-8') as commands_file:
@@ -85,6 +88,15 @@ class Command:
 
                 output_text = f'A data atual é dia {day} de {month} de{year}'
 
+            case "temperatura":
+                command = 'temperatura'
+                latitude, longetude = self.geo.getGeoPosition()
+                url = 'https://api.open-meteo.com/v1/forecast'
+                req = requests.get(f'{url}?latitude={latitude}&longitude={longetude}&current_weather=true&hourly=precipitation_probability')
+                temp = req.json()
+
+                output_text = f'A temperatura atual é {temp["current_weather"]["temperature"]} ° celsius e a maior probabilidade de chuva no dia é de {max(temp["hourly"]["precipitation_probability"])} %'
+
         self.assistant.speak('command-output', output_text)
         self.audio_system.delete_audio('command-output')
 
@@ -101,13 +113,11 @@ class Command:
 
         keywords = self.natura_lang.get_keywords(command)
 
-        print(keywords)
-
         self.current_command_tokens = keywords
 
         internal_command = self.find_command(keywords)
 
-        print("internal command "+internal_command)
+        print("internal command " + internal_command)
 
         # try to find internal command using synonyms of keywords
         if internal_command == '':
@@ -125,5 +135,5 @@ class Command:
 
         self.assistant.speak('command-output', final_openai_text_response)
         self.audio_system.delete_audio('command-output')
-        
+
         return True
