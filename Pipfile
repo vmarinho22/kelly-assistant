@@ -13,6 +13,8 @@ openai = "*"
 python-dotenv = "*"
 peewee = "*"
 python-dateutil = "*"
+geocoder = "*"
+requests = "*"
 
 [dev-packages]
 
