@@ -15,7 +15,7 @@ class SpeechRecognition:
 
         with sr.Microphone() as source:
             print(log_message)
-            audio_data = self.recognizer.listen(source)
+            audio_data = self.recognizer.listen(source, timeout=5000, phrase_time_limit=5)
             print('Audio captado!')
             print('')
             return audio_data
