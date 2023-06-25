@@ -12,6 +12,6 @@ class GeoLocation:
         ip = response.text
         return ip
 
-    def getGeoPosition(self) -> [float]:
+    def getGeoPosition(self) -> list[float]:
         g = geocoder.ip(self.getIp())
         return g.latlng
