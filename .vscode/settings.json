@@ -17,5 +17,5 @@
     "tagsets",
     "wordnet"
   ],
-  "python.analysis.typeCheckingMode": "basic"
+  "python.analysis.typeCheckingMode": "off"
 }
