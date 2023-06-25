@@ -27,6 +27,7 @@ class Command:
     audio_system = AudioSystem()
     geo = GeoLocation()
     current_command_tokens = []
+    full_month = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setempro', 'outubro', 'novembro', 'dezembro']
 
     def __init__(self) -> None:
         self.event = None
@@ -83,7 +84,7 @@ class Command:
                 command = 'data'
                 now = datetime.now()
                 day = now.day
-                month = self.event.full_month[now.month - 1]
+                month = self.full_month[now.month - 1]
                 year = now.year
 
                 output_text = f'A data atual é dia {day} de {month} de{year}'
