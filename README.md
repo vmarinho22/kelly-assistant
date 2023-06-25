@@ -76,6 +76,7 @@ Pronto! Agora a Kelly Assistant está rodando e escutando seus comandos!
 | :---------- | :--------- | :---------------------------------- |
 | `hora` | Comando voltado para receber o horário atual | "Que horas são?"
 | `data` | Comando voltado para receber a data atual | "Que dia é hoje?"
+| `temperatura` | Comando voltado para receber a temperatura atual | "Qual a temperatura atual?"
 | `*` | Caso não seja encontrado nenhum acima, a AI irá perguntar a API da OpenAI e trará a resposta (similar ao ChatGPT) | "Por que os pássaros voam?"
 
 

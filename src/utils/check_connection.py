@@ -1,4 +1,4 @@
-from urllib.request import URLError, urlopen
+from urllib.request import URLError, urlopen # type: ignore
 
 
 def online():

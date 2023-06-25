@@ -110,6 +110,9 @@ class Command:
         print('')
         print("Comando: " + command)
         print('')
+        
+        if command == self.assistant.shutdown_command:
+            return False
 
         keywords = self.natura_lang.get_keywords(command)
 
@@ -128,10 +131,15 @@ class Command:
             return True
 
         # If command has not found, the AI transform command in question and use OPENAI API to search the answer
+        gptMessages =[{"role": "system", "content": "Você é a Kelly, uma assistente virtual que ajuda pessoas."}, {"role": "user", "content": f'De forma resumida, respoda: {command}'}]
+        
+        try:
+            response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=gptMessages)
 
-        response = openai.Completion.create(model="text-davinci-003", prompt=command, temperature=0, max_tokens=2048)
-
-        final_openai_text_response = response["choices"][0]["text"]
+            final_openai_text_response = response["choices"][0]["message"]["content"]
+        
+        except:
+            final_openai_text_response = "Devido a um problema interno não foi possível responder sua pergunta."
 
         self.assistant.speak('command-output', final_openai_text_response)
         self.audio_system.delete_audio('command-output')
