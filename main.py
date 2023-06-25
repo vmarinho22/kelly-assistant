@@ -28,10 +28,7 @@ def main():
             time.sleep(5)
         try:
 
-            # assistant.speak('help')
             raw_command_text = assistant.listen('Ouvindo...')
-            
-            print('raw_command_text', raw_command_text)
 
             if assistant.is_called(raw_command_text):
                 

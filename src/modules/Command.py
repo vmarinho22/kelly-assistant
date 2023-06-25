@@ -110,6 +110,9 @@ class Command:
         print('')
         print("Comando: " + command)
         print('')
+        
+        if command == self.assistant.shutdown_command:
+            return False
 
         keywords = self.natura_lang.get_keywords(command)
 
