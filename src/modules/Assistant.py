@@ -41,3 +41,7 @@ class Assistant:
         
     def is_called(self, text: str) -> bool:
         return 'kelly' in text.lower()
+    
+    def removeAssistantNameOfCommand(self, rawCommand: str) -> str:
+        return rawCommand.lower().replace('kelly', '').strip()
+        

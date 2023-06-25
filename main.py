@@ -28,19 +28,21 @@ def main():
             time.sleep(5)
         try:
 
-            audio_transpiled = assistant.listen('Ouvindo...')
+            # assistant.speak('help')
+            raw_command_text = assistant.listen('Ouvindo...')
+            
+            print('raw_command_text', raw_command_text)
 
-            if assistant.is_called(audio_transpiled):
-                assistant.speak('help')
-
-                command_text = assistant.listen('Aguardando comando...')
+            if assistant.is_called(raw_command_text):
+                
+                command_text = assistant.removeAssistantNameOfCommand(raw_command_text)
 
                 assistant.speak('running-command')
                 time.sleep(1)
 
                 command.process(command_text)
             else:
-                print('Ignorando comando\n')
+                print('Assistente não chamada\n')
                 print('')
         except Exception as error:
             print('Não consigo entender o que falou :/')
