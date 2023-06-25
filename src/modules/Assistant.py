@@ -24,11 +24,11 @@ class Assistant:
         # Check if audio is null or in silence
         if audio_data.frame_data != b'' or audio_data.frame_data != b'\x00' * len(audio_data.frame_data):
             audio_transpiled = self.speech_recognition.transpile_audio(audio_data)
-            return audio_transpiled
+            return audio_transpiled # type: ignore
         
         return ''
     
-    def speak(self, file_name: str, text: str = None) -> None:
+    def speak(self, file_name: str, text: str | None = None) -> None:
         """
             Method to speak audio from internal file.
             

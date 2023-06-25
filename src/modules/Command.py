@@ -137,7 +137,7 @@ class Command:
         try:
             response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=gptMessages)
 
-            final_openai_text_response = response["choices"][0]["message"]["content"]
+            final_openai_text_response = response["choices"][0]["message"]["content"] # type: ignore
         
         except:
             final_openai_text_response = "Devido a um problema interno não foi possível responder sua pergunta."
