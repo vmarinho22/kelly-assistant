@@ -15,6 +15,7 @@ peewee = "*"
 python-dateutil = "*"
 geocoder = "*"
 requests = "*"
+pytest = "*"
 
 [dev-packages]
 
