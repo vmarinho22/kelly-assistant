@@ -16,6 +16,7 @@ python-dateutil = "*"
 geocoder = "*"
 requests = "*"
 pytest = "*"
+pytest-mock = "*"
 
 [dev-packages]
 

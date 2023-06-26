@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "95327d28364508fa2736d9a8fc51f229a455a37b193a7dcc15ab6c296363d80c"
+            "sha256": "d3f6c0904c3212c9662f63af5dce86fcb918771b084a4681b71b4273db0dd64a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -531,6 +531,14 @@
             ],
             "index": "kelly-assistant",
             "version": "==7.4.0"
+        },
+        "pytest-mock": {
+            "hashes": [
+                "sha256:21c279fff83d70763b05f8874cc9cfb3fcacd6d354247a976f9529d19f9acf39",
+                "sha256:7f6b125602ac6d743e523ae0bfa71e1a697a2f5534064528c6ff84c2f7c2fc7f"
+            ],
+            "index": "kelly-assistant",
+            "version": "==3.11.1"
         },
         "python-dateutil": {
             "hashes": [
