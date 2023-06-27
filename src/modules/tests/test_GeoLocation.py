@@ -12,6 +12,9 @@ class MockGeoCoder:
     def __init__(self):
         self.latlng = [0, 0]
 
+def test_smoke():
+    assert isinstance(geo, GeoLocation)
+
 def test_getIp (mocker):
     mock_class_request = MagicMock(spec=MockRequest())
     mock_class_request.text = '192.168.0.1'
