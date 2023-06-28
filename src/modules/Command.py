@@ -90,13 +90,17 @@ class Command:
                 output_text = f'A data atual é dia {day} de {month} de{year}'
 
             case "temperatura":
-                command = 'temperatura'
-                latitude, longetude = self.geo.getGeoPosition()
-                url = 'https://api.open-meteo.com/v1/forecast'
-                req = requests.get(f'{url}?latitude={latitude}&longitude={longetude}&current_weather=true&hourly=precipitation_probability')
-                temp = req.json()
+                try:
+                    command = 'temperatura'
+                    latitude, longetude = self.geo.getGeoPosition()
+                    url = 'https://api.open-meteo.com/v1/forecast'
+                    req = requests.get(f'{url}?latitude={latitude}&longitude={longetude}&current_weather=true&hourly=precipitation_probability')
+                    temp = req.json()
 
-                output_text = f'A temperatura atual é {temp["current_weather"]["temperature"]} ° celsius e a maior probabilidade de chuva no dia é de {max(temp["hourly"]["precipitation_probability"])} %'
+                    output_text = f'A temperatura atual é {temp["current_weather"]["temperature"]} ° celsius \
+                          e a maior probabilidade de chuva no dia é de {max(temp["hourly"]["precipitation_probability"])} %'
+                except:
+                    output_text = "Devido a sobrecarga nos servidor de verificação de clima não foi possível obter a temperatura atual."
 
         self.assistant.speak('command-output', output_text)
         self.audio_system.delete_audio('command-output')
@@ -112,7 +116,7 @@ class Command:
         print("Comando: " + command)
         print('')
         
-        if command == self.assistant.shutdown_command:
+        if command.lower() == self.assistant.shutdown_command:
             return False
 
         keywords = self.natura_lang.get_keywords(command)
