@@ -94,7 +94,7 @@ class Command:
                     command = 'temperatura'
                     latitude, longetude = self.geo.getGeoPosition()
                     url = 'https://api.open-meteo.com/v1/forecast'
-                    req = requests.get(f'{url}?latitude={latitude}&longitude={longetude}&current_weather=true&hourly=precipitation_probability')
+                    req = requests.get(f'{url}?latitude={latitude}&longitude={longetude}&current_weather=true&hourly=precipitation_probability', timeout=5)
                     temp = req.json()
 
                     output_text = f'A temperatura atual é {temp["current_weather"]["temperature"]} ° celsius \
