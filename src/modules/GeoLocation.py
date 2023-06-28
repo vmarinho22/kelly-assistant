@@ -8,7 +8,7 @@ class GeoLocation:
     """
     def getIp(self) -> str:
         url = 'https://api.ipify.org'  # Serviço para obtenção do endereço IP
-        response = requests.get(url, timeout=5000)
+        response = requests.get(url, timeout=5)
         ip = response.text
         return ip
 
