@@ -96,3 +96,6 @@ Para rodar os testes primeiro deve instalar as dependências com o `Pipenv` (con
 
 - [@vmarinho22](https://github.com/vmarinho22)
 - [@DarknessChains](https://github.com/DarknessChains)
+
+## Contruibuidores
+- [JonathanSMoraes](https://github.com/JonathanSMoraes)
