@@ -34,6 +34,10 @@ def main():
                 
                 command_text = assistant.removeAssistantNameOfCommand(raw_command_text)
 
+                if command_text == '':
+                    assistant.speak('help')
+                    command_text = assistant.listen('Ouvindo comando...')
+
                 assistant.speak('running-command')
                 time.sleep(1)
 

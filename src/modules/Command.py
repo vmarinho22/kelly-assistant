@@ -27,6 +27,7 @@ class Command:
     audio_system = AudioSystem()
     geo = GeoLocation()
     current_command_tokens = []
+    full_month = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setempro', 'outubro', 'novembro', 'dezembro']
 
     def __init__(self) -> None:
         self.event = None
@@ -83,19 +84,23 @@ class Command:
                 command = 'data'
                 now = datetime.now()
                 day = now.day
-                month = self.event.full_month[now.month - 1]
+                month = self.full_month[now.month - 1]
                 year = now.year
 
                 output_text = f'A data atual é dia {day} de {month} de{year}'
 
             case "temperatura":
-                command = 'temperatura'
-                latitude, longetude = self.geo.getGeoPosition()
-                url = 'https://api.open-meteo.com/v1/forecast'
-                req = requests.get(f'{url}?latitude={latitude}&longitude={longetude}&current_weather=true&hourly=precipitation_probability')
-                temp = req.json()
+                try:
+                    command = 'temperatura'
+                    latitude, longetude = self.geo.getGeoPosition()
+                    url = 'https://api.open-meteo.com/v1/forecast'
+                    req = requests.get(f'{url}?latitude={latitude}&longitude={longetude}&current_weather=true&hourly=precipitation_probability')
+                    temp = req.json()
 
-                output_text = f'A temperatura atual é {temp["current_weather"]["temperature"]} ° celsius e a maior probabilidade de chuva no dia é de {max(temp["hourly"]["precipitation_probability"])} %'
+                    output_text = f'A temperatura atual é {temp["current_weather"]["temperature"]} ° celsius \
+                          e a maior probabilidade de chuva no dia é de {max(temp["hourly"]["precipitation_probability"])} %'
+                except:
+                    output_text = "Devido a sobrecarga nos servidor de verificação de clima não foi possível obter a temperatura atual."
 
         self.assistant.speak('command-output', output_text)
         self.audio_system.delete_audio('command-output')
@@ -111,7 +116,7 @@ class Command:
         print("Comando: " + command)
         print('')
         
-        if command == self.assistant.shutdown_command:
+        if command.lower() == self.assistant.shutdown_command:
             return False
 
         keywords = self.natura_lang.get_keywords(command)
@@ -136,7 +141,7 @@ class Command:
         try:
             response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=gptMessages)
 
-            final_openai_text_response = response["choices"][0]["message"]["content"]
+            final_openai_text_response = response["choices"][0]["message"]["content"] # type: ignore
         
         except:
             final_openai_text_response = "Devido a um problema interno não foi possível responder sua pergunta."
