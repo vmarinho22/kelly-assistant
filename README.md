@@ -82,6 +82,16 @@ Pronto! Agora a Kelly Assistant está rodando e escutando seus comandos!
 
 Novos comandos serão adicionados ao decorrer do desenvolvimento desse projeto(inclusive, caso tenha sugestões, mande em uma issue ou PR 😊 )
 
+## Testes
+
+Nesse projeto utilizamos o `Pytest` para criar nossos testes unitários, onde em cada pasta você encontrará uma pasta `/tests`, e dentro dela estará cada teste referente a pasta pai!
+
+Para rodar os testes primeiro deve instalar as dependências com o `Pipenv` (conforme guia acima), e rodar o comando abaixo:
+
+```bash
+  python -m pytest
+```
+
 ## Autores
 
 - [@vmarinho22](https://github.com/vmarinho22)
